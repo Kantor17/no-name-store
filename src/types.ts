@@ -1,4 +1,10 @@
-export type Categories = 'mclothing' | 'wclothing'| 'jewelry' | 'electronics'; 
+export type Categories = "mclothing" | "wclothing" | "jewelry" | "electronics";
+
+export enum SortTypes {
+  POPULARITY = "popularity",
+  PRICE_ASCENDING = "price-asc",
+  PRICE_DESCENDING = "price-desc",
+}
 
 export interface Product {
   category: Categories;
@@ -15,4 +21,5 @@ export interface Product {
 
 export interface ProductsState {
   products: Product[];
+  sortType: SortTypes;
 }
