@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Container from "./Container";
 
@@ -24,11 +25,11 @@ export default function Header() {
       <Container>
         <div className="navbar">
           <h1 className="logo">
-            <a href="/">NONAME</a>
+          <Link to={'/'}>NONAME</Link>
           </h1>
           <ul className="navlist">
             <li className="navitem">
-              <a href="#">Catalog</a>
+              <Link to={'/catalog'}>Catalog</Link>
             </li>
             <li className="navitem">
               <a href="#">Profile</a>

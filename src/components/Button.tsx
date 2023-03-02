@@ -7,8 +7,6 @@ const StyledButton = styled.button`
   color: #000;
   border: 2px solid #fff;
   border-radius: 36px;
-  font: inherit;
-  cursor: pointer;
 `;
 
 export default function Button({ children }: { children: React.ReactNode }) {

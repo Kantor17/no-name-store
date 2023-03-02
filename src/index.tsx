@@ -1,6 +1,13 @@
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { createGlobalStyle } from "styled-components";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import Catalog from "./pages/Catalog";
+import store from "./store";
+import { Provider } from "react-redux";
 
 const Global = createGlobalStyle`
   * {
@@ -12,7 +19,7 @@ const Global = createGlobalStyle`
   html, body, #root, .App {
     height: 100%;
   }
-  .App > * {
+  #root > * {
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -29,7 +36,28 @@ const Global = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  button {
+    cursor: pointer;
+    font: inherit;
+    background-color: inherit;
+    border: none;
+  }
 `;
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />
+  },
+  {
+    path: 'catalog',
+    element: <Catalog />
+  }
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -37,6 +65,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <Global />
-    <App />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </>
 );
