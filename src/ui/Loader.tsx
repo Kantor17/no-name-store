@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const StyledLoader = styled.div`
-    position: relative;
-    top: 8px;
-    display: flex;
-    justify-content: center;
-    gap: 4px;
+  position: relative;
+  top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
   .dot {
     width: 10px;
     height: 10px;

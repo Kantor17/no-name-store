@@ -16,5 +16,6 @@ export default async function getProducts(
       : ""
   }
   `);
+  if (!res.ok) throw new Error("Server problems. Please try again later");
   return res.json();
 }

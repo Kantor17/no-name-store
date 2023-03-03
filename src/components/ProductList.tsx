@@ -5,7 +5,8 @@ import styled from "styled-components";
 import fetchProducts from "../API/fetchProducts";
 import ProductCard from "./ProductCard";
 import { Product, SortTypes } from "../types";
-import Loader from "./Loader";
+import Loader from "../ui/Loader";
+import ModalError from "../ui/ModalError";
 
 const StyledProductList = styled.ul`
   display: flex;
@@ -22,6 +23,7 @@ const LoaderWrapper = styled.div`
 `;
 
 export default function ProductList() {
+  const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useTypedDispatch();
@@ -51,23 +53,34 @@ export default function ProductList() {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      const res = await fetchProducts(category);
-      dispatch(replaceProducts(res));
+      try {
+        const res = await fetchProducts(category);
+        if (res.length < 1) throw new Error("No products found");
+        dispatch(replaceProducts(res));
+      } catch (err) {
+        setError(err as Error);
+      }
       setIsLoading(false);
     })();
   }, [dispatch, category]);
 
+  if (error) {
+    return (
+      <ModalError closeCb={() => setError(null)} error={error}></ModalError>
+    );
+  }
+  if (isLoading) {
+    return (
+      <LoaderWrapper>
+        <Loader />
+      </LoaderWrapper>
+    );
+  }
   return (
-    <>
-      {isLoading ? (
-        <LoaderWrapper><Loader /></LoaderWrapper>
-      ) : (
-        <StyledProductList>
-          {[...products].map((product) => (
-            <ProductCard product={product} key={product.id} />
-          ))}
-        </StyledProductList>
-      )}
-    </>
+    <StyledProductList>
+      {[...products].map((product) => (
+        <ProductCard product={product} key={product.id} />
+      ))}
+    </StyledProductList>
   );
 }
