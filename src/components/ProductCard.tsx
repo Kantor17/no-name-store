@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Product } from "../types";
 import cartIcon from "../assets/cart.svg";
 
-const StyledProductCard = styled.div`
+const StyledProductCard = styled.a`
   display: flex;
   width: 400px;
   height: 230px;
@@ -37,7 +37,7 @@ const StyledProductCard = styled.div`
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <StyledProductCard>
+    <StyledProductCard href={`catalog/:${product.id}`}>
       <img src={product.image} alt={product.title} className="image" />
       <div className="info">
         <h4 className="name">{product.title}</h4>

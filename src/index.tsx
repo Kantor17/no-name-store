@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import store from "./store";
 import { Provider } from "react-redux";
+import ProductPage from "./pages/ProductPage";
 
 const Global = createGlobalStyle`
   * {
@@ -54,8 +55,12 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: 'catalog',
+    path: '/catalog',
     element: <Catalog />
+  },
+  {
+    path: '/catalog/:id',
+    element: <ProductPage />
   }
 ]);
 
