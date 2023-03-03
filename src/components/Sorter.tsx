@@ -7,12 +7,17 @@ const StyledSorter = styled.div`
   display: flex;
   gap: 6px;
   align-items: center;
+  font-size: 18px;
   .options {
-    height: 20px;
+    height: 25px;
     border: 1px solid;
     border-radius: 4px;
     outline: none;
     cursor: pointer;
+    font-size: 15px;
+  }
+  .option {
+    font-size: 15px;
   }
 `;
 

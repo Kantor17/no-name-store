@@ -8,9 +8,9 @@ export default async function getProducts(
     limit?: number;
   }
 ): Promise<Product[]> {
-  const res = await fetch(`${BASE_URL}/products
-  ${category ? `/category/${category}` : ""}
-  ${
+  const res = await fetch(`${BASE_URL}/products${
+    category ? `/category/${category}` : ""
+  }${
     queries
       ? `?${Object.entries(queries).forEach((entry) => entry.join("="))}`
       : ""

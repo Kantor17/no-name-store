@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import Button from "./Button";
+import { CategoryTypes } from "../types";
+import BannerButton from "./BannerButton";
 
 interface BannerProps {
-  title: string;
+  category: CategoryTypes;
+  title?: string;
   isBig?: boolean;
   bgImg?: string;
 }
@@ -23,6 +25,7 @@ const StyledBanner = styled.div<Pick<BannerProps, "bgImg">>`
   .title {
     text-align: center;
     font-size: 28px;
+    text-transform: capitalize;
   }
 `;
 
@@ -35,18 +38,18 @@ const BigBanner = styled(StyledBanner)`
   }
 `;
 
-export default function Banner({ title, isBig, bgImg }: BannerProps) {
+export default function Banner({ category, title, isBig, bgImg }: BannerProps) {
   if (isBig)
     return (
       <BigBanner bgImg={bgImg}>
-        <h2 className="title">{title}</h2>
-        <Button>Shop Now</Button>
+        <h2 className="title">{title ? title : category}</h2>
+        <BannerButton category={category}>Shop Now</BannerButton>
       </BigBanner>
     );
   return (
     <StyledBanner bgImg={bgImg}>
-      <h2 className="title">{title}</h2>
-      <Button>Shop Now</Button>
+      <h2 className="title">{title ? title : category}</h2>
+      <BannerButton category={category}>Shop Now</BannerButton>
     </StyledBanner>
   );
 }

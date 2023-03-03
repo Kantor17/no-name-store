@@ -11,12 +11,12 @@ const StyledProductList = styled.ul`
   justify-content: center;
   flex-wrap: wrap;
   gap: 24px;
-  padding: 12px 0;
+  padding: 16px 0;
 `;
 
 export default function ProductList() {
   const dispatch = useTypedDispatch();
-  const products = useTypedSelector((state) => {
+  const { products, category } = useTypedSelector((state) => {
     let compareFunc;
     switch (state.products.sortType) {
       case SortTypes.POPULARITY: {
@@ -33,15 +33,18 @@ export default function ProductList() {
         break;
       }
     }
-    return [...state.products.products].sort(compareFunc);
+    return {
+      products: [...state.products.products].sort(compareFunc),
+      category: state.products.category,
+    };
   });
 
   useEffect(() => {
     (async () => {
-      const res = await fetchProducts();
+      const res = await fetchProducts(category);
       dispatch(replaceProducts(res));
     })();
-  }, [dispatch]);
+  }, [dispatch, category]);
 
   return (
     <StyledProductList>

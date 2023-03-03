@@ -1,4 +1,4 @@
-export type Categories = "mclothing" | "wclothing" | "jewelry" | "electronics";
+export type CategoryTypes = "men's clothing" | "women's clothing" | "jewelery" | "electronics";
 
 export enum SortTypes {
   POPULARITY = "popularity",
@@ -7,7 +7,7 @@ export enum SortTypes {
 }
 
 export interface Product {
-  category: Categories;
+  category: CategoryTypes;
   description: string;
   id: number;
   image: string;
@@ -22,4 +22,5 @@ export interface Product {
 export interface ProductsState {
   products: Product[];
   sortType: SortTypes;
+  category: CategoryTypes;
 }

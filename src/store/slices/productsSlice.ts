@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product, ProductsState, SortTypes } from "../../types";
+import { CategoryTypes, Product, ProductsState, SortTypes } from "../../types";
 
 const initialState: ProductsState = {
   products: [],
   sortType: SortTypes.POPULARITY,
+  category: "electronics",
 };
 const productsSlice = createSlice({
   name: "products",
@@ -15,9 +16,12 @@ const productsSlice = createSlice({
     changeSorting: (state, action: PayloadAction<SortTypes>) => {
       state.sortType = action.payload;
     },
+    changeCategory: (state, action: PayloadAction<CategoryTypes>) => {
+      state.category = action.payload;
+    },
   },
 });
 
 export default productsSlice.reducer;
 
-export const { replaceProducts, changeSorting } = productsSlice.actions;
+export const { replaceProducts, changeSorting, changeCategory } = productsSlice.actions;

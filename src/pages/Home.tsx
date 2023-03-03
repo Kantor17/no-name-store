@@ -5,7 +5,7 @@ import Banner from "../components/Banner";
 import clothingImg from "../assets/clothing.jpg";
 import electronicsImg from "../assets/electronics.jpg";
 import womenClothingImg from "../assets/women-clothing.jpg";
-import jewelryImg from "../assets/jewelry.jpg";
+import jeweleryImg from "../assets/jewelery.jpg";
 import Footer from "../components/Footer";
 
 const StyledHome = styled.div`
@@ -31,7 +31,7 @@ export default function Home() {
       <main className="main">
         <Container>
           <section className="section">
-            <Banner
+            <Banner category="men's clothing"
               title="New Men's Clothing Arrivals"
               isBig
               bgImg={clothingImg}
@@ -40,9 +40,9 @@ export default function Home() {
           <section className="section">
             <h2 className="heading">Other categories</h2>
             <ul className="banner-list">
-              <Banner title="Women's clothing" bgImg={womenClothingImg} />
-              <Banner title="Jewelry" bgImg={jewelryImg} />
-              <Banner title="Electronics" bgImg={electronicsImg} />
+              <Banner category="women's clothing" bgImg={womenClothingImg} />
+              <Banner category="jewelery" bgImg={jeweleryImg} />
+              <Banner category="electronics" bgImg={electronicsImg} />
             </ul>
           </section>
         </Container>

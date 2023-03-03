@@ -8,7 +8,7 @@ const StyledProductCard = styled.div`
   height: 230px;
   border-radius: 8px;
   padding: 6px 10px;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   cursor: pointer;
   .cart-btn {
     width: 30px;

@@ -4,8 +4,17 @@ import Footer from "../components/Footer";
 import Container from "../components/Container";
 import ProductList from "../components/ProductList";
 import Sorter from "../components/Sorter";
+import Categories from "../components/Categories";
 
-const StyledCatalog = styled.div``;
+const StyledCatalog = styled.div`
+.control-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+`;
 
 export default function Catalog() {
   return (
@@ -13,7 +22,10 @@ export default function Catalog() {
       <Header />
       <main className="main">
         <Container>
-          <Sorter />
+          <div className="control-panel">
+            <Categories />
+            <Sorter />
+          </div>
           <ProductList />
         </Container>
       </main>
