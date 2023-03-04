@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 const StyledLoader = styled.div<LoaderProps>`
   position: relative;
+  height: 100%;
   top: 8px;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 4px;
   .dot {
     width: 10px;

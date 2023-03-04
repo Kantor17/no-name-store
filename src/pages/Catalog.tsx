@@ -18,7 +18,7 @@ const StyledCatalog = styled.div`
 
 export default function Catalog() {
   return (
-    <StyledCatalog>
+    <StyledCatalog className="page">
       <Header />
       <Main>
         <div className="control-panel">

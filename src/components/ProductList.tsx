@@ -16,12 +16,6 @@ const StyledProductList = styled.ul`
   padding: 16px 0;
 `;
 
-const LoaderWrapper = styled.div`
-  padding: 50px 0;
-  display: flex;
-  justify-content: center;
-`;
-
 export default function ProductList() {
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,11 +64,7 @@ export default function ProductList() {
     );
   }
   if (isLoading) {
-    return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
-    );
+    return <Loader />;
   }
   return (
     <StyledProductList>

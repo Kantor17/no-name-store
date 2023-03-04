@@ -14,7 +14,7 @@ const Global = createGlobalStyle`
   html, body, #root, .App {
     height: 100%;
   }
-  #root > * {
+  .page {
     height: 100%;
     display: flex;
     flex-direction: column;

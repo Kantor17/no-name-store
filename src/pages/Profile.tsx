@@ -27,7 +27,7 @@ const StyledProfile = styled.div`
 export default function Profile() {
   const user = useTypedSelector((state) => state.auth.user);
   return (
-    <StyledProfile>
+    <StyledProfile className="page">
       <Header />
       <Main>
         <div className="user-info">

@@ -7,7 +7,7 @@ import Main from "../components/Main";
 const StyledAuthPage = styled.div``;
 export default function AuthPage({ type }: { type: "login" | "register" }) {
   return (
-    <StyledAuthPage>
+    <StyledAuthPage className="page">
       <Header />
       <Main>
         <AuthForm type={type} />

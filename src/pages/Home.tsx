@@ -26,7 +26,7 @@ const StyledHome = styled.div`
 
 export default function Home() {
   return (
-    <StyledHome>
+    <StyledHome className="page">
       <Header />
       <Main>
         <section className="section">

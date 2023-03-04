@@ -36,7 +36,7 @@ export default function ProductPage() {
 
   const navigate = useNavigate();
   return (
-    <StyledProductPage>
+    <StyledProductPage className="page">
       <Header />
       <Main>
         {error ? (

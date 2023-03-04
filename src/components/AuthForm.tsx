@@ -102,7 +102,7 @@ export default function AuthForm({ type }: { type: "login" | "register" }) {
         </Button>
         {type === "login" && (
           <div className="register-proposition">
-            Don't yet have an account? <Link to={"/register"}>Register</Link>
+            Don't have an account yet? <Link to={"/register"}>Register</Link>
           </div>
         )}
         {type === "register" && (
