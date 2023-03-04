@@ -1,14 +1,8 @@
 import ReactDOM from "react-dom/client";
 import { createGlobalStyle } from "styled-components";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Home from "./pages/Home";
-import Catalog from "./pages/Catalog";
-import store from "./store";
 import { Provider } from "react-redux";
-import ProductPage from "./pages/ProductPage";
+import store from "./store";
+import App from "./App"
 
 const Global = createGlobalStyle`
   * {
@@ -21,7 +15,7 @@ const Global = createGlobalStyle`
     height: 100%;
   }
   #root > * {
-    min-height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -44,21 +38,6 @@ const Global = createGlobalStyle`
   }
 `;
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />
-  },
-  {
-    path: '/catalog',
-    element: <Catalog />
-  },
-  {
-    path: '/catalog/:id',
-    element: <ProductPage />
-  }
-]);
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -66,7 +45,7 @@ root.render(
   <>
     <Global />
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <App />
     </Provider>
   </>
 );

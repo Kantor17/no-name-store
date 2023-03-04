@@ -32,7 +32,7 @@ export default function Header() {
               <Link to={'/catalog'}>Catalog</Link>
             </li>
             <li className="navitem">
-              <a href="#">Profile</a>
+              <Link to={'/profile'}>Profile</Link>
             </li>
             <li className="navitem">
               <a href="#">Cart</a>

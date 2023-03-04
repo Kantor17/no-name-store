@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledLoader = styled.div`
+const StyledLoader = styled.div<LoaderProps>`
   position: relative;
   top: 8px;
   display: flex;
@@ -10,7 +10,7 @@ const StyledLoader = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #26272b;
+    background-color: ${props => props.inverted ? '#dddddd' : '#26272b'};
     animation: bouncing 0.6s infinite alternate;
   }
   .dot-2 {
@@ -26,9 +26,13 @@ const StyledLoader = styled.div`
     }
   }
 `;
-export default function Loader() {
+
+interface LoaderProps {
+  inverted?: boolean;
+}
+export default function Loader({ inverted }: LoaderProps) {
   return (
-    <StyledLoader>
+    <StyledLoader inverted={inverted}>
       <div className="dot dot-1" />
       <div className="dot dot-2" />
       <div className="dot dot-3" />

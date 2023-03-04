@@ -1,4 +1,10 @@
-export type CategoryTypes = "men's clothing" | "women's clothing" | "jewelery" | "electronics";
+import { User } from "firebase/auth";
+
+export type CategoryTypes =
+  | "men's clothing"
+  | "women's clothing"
+  | "jewelery"
+  | "electronics";
 
 export enum SortTypes {
   POPULARITY = "popularity",
@@ -23,4 +29,9 @@ export interface ProductsState {
   products: Product[];
   sortType: SortTypes;
   category: CategoryTypes;
+}
+
+export interface AuthState {
+  user: User | null;
+  isLoading: boolean;
 }

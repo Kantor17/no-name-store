@@ -4,7 +4,7 @@ import { useTypedDispatch } from "../hooks/reduxHooks";
 import { changeCategory } from "../store/slices/productsSlice";
 import { CategoryTypes } from "../types";
 
-const StyledButton = styled.button`
+const StyledBannerButton = styled.button`
   width: 120px;
   height: 40px;
   background-color: #fff;
@@ -13,12 +13,22 @@ const StyledButton = styled.button`
   border-radius: 36px;
 `;
 
-export default function Button({ category, children }: {category: CategoryTypes, children: React.ReactNode }) {
+export default function BannerButton({
+  category,
+  children,
+}: {
+  category: CategoryTypes;
+  children: React.ReactNode;
+}) {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   function goToCatalog(category: CategoryTypes) {
     dispatch(changeCategory(category));
-    navigate('/catalog');
+    navigate("/catalog", { replace: true });
   }
-  return <StyledButton onClick={() => goToCatalog(category)}>{children}</StyledButton>;
+  return (
+    <StyledBannerButton onClick={() => goToCatalog(category)}>
+      {children}
+    </StyledBannerButton>
+  );
 }

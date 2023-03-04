@@ -11,6 +11,10 @@ const StyledModalError = styled.div`
     font-size: 24px;
     color: #fe4141;
   }
+
+  .modal-error__message::first-letter {
+    text-transform: uppercase;
+  }
 `;
 
 interface IModalErrorProps {

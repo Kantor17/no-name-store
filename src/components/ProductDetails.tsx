@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Product } from "../types";
 import ratingIcon from "../assets/rating.svg";
+import Button from "../ui/Button";
 
 const StyledProductDetails = styled.div`
   display: flex;
@@ -54,15 +55,6 @@ const StyledProductDetails = styled.div`
     font-size: 20px;
     font-weight: 700;
   }
-  .cart-btn {
-    display: block;
-    width: 200px;
-    font-size: 17px;
-    color: #fff;
-    height: 40px;
-    background-color: #26272b;
-    text-transform: uppercase;
-  }
   .order {
     display: flex;
     flex-direction: column;
@@ -87,7 +79,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         </div>
         <div className="order">
           <div className="price">{product.price} $</div>
-          <button className="cart-btn">Add to cart</button>
+          <Button>Add to cart</Button>
         </div>
       </div>
     </StyledProductDetails>
