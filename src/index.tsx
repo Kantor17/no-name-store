@@ -25,11 +25,6 @@ const Global = createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
-  .main {
-    padding: 10px 0 35px 0;
-    flex: 1 1 auto;
-  }
-  
   ul, ol {
     list-style: none;
   }

@@ -1,12 +1,12 @@
 import Header from "../components/Header";
 import styled from "styled-components";
-import Container from "../components/Container";
 import Banner from "../components/Banner";
 import clothingImg from "../assets/clothing.jpg";
 import electronicsImg from "../assets/electronics.jpg";
 import womenClothingImg from "../assets/women-clothing.jpg";
 import jeweleryImg from "../assets/jewelery.jpg";
 import Footer from "../components/Footer";
+import Main from "../components/Main";
 
 const StyledHome = styled.div`
   .section {
@@ -28,25 +28,24 @@ export default function Home() {
   return (
     <StyledHome>
       <Header />
-      <main className="main">
-        <Container>
-          <section className="section">
-            <Banner category="men's clothing"
-              title="New Men's Clothing Arrivals"
-              isBig
-              bgImg={clothingImg}
-            />
-          </section>
-          <section className="section">
-            <h2 className="heading">Other categories</h2>
-            <ul className="banner-list">
-              <Banner category="women's clothing" bgImg={womenClothingImg} />
-              <Banner category="jewelery" bgImg={jeweleryImg} />
-              <Banner category="electronics" bgImg={electronicsImg} />
-            </ul>
-          </section>
-        </Container>
-      </main>
+      <Main>
+        <section className="section">
+          <Banner
+            category="men's clothing"
+            title="New Men's Clothing Arrivals"
+            isBig
+            bgImg={clothingImg}
+          />
+        </section>
+        <section className="section">
+          <h2 className="heading">Other categories</h2>
+          <ul className="banner-list">
+            <Banner category="women's clothing" bgImg={womenClothingImg} />
+            <Banner category="jewelery" bgImg={jeweleryImg} />
+            <Banner category="electronics" bgImg={electronicsImg} />
+          </ul>
+        </section>{" "}
+      </Main>
       <Footer />
     </StyledHome>
   );

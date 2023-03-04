@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import fetchProduct from "../API/fetchProduct";
-import Container from "../components/Container";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Main from "../components/Main";
 import ProductDetails from "../components/ProductDetails";
 import { Product } from "../types";
 import Loader from "../ui/Loader";
@@ -38,20 +38,15 @@ export default function ProductPage() {
   return (
     <StyledProductPage>
       <Header />
-      <main className="main">
-        <Container>
-          {error ? (
-            <ModalError
-              error={error}
-              closeCb={() => navigate(-1)}
-            />
-          ) : product ? (
-            <ProductDetails product={product} />
-          ) : (
-            <Loader />
-          )}
-        </Container>
-      </main>
+      <Main>
+        {error ? (
+          <ModalError error={error} closeCb={() => navigate(-1)} />
+        ) : product ? (
+          <ProductDetails product={product} />
+        ) : (
+          <Loader />
+        )}
+      </Main>
       <Footer />
     </StyledProductPage>
   );
