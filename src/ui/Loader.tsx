@@ -12,7 +12,7 @@ const StyledLoader = styled.div<LoaderProps>`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: ${props => props.inverted ? '#dddddd' : '#26272b'};
+    background-color: ${(props) => (props.inverted ? "#dddddd" : "#26272b")};
     animation: bouncing 0.6s infinite alternate;
   }
   .dot-2 {

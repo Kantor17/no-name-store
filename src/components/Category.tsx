@@ -3,15 +3,20 @@ import { useTypedDispatch, useTypedSelector } from "../hooks/reduxHooks";
 import { changeCategory } from "../store/slices/productsSlice";
 import { CategoryTypes } from "../types";
 
-const StyledCategory = styled.li<{type: CategoryTypes, currentCategory: CategoryTypes}>`
+const StyledCategory = styled.li<{
+  type: CategoryTypes;
+  currentCategory: CategoryTypes;
+}>`
   .category-btn {
     background-color: #26272b;
     width: 160px;
     height: 25px;
     font-size: 18px;
     text-transform: capitalize;
-    color: ${(props) => props.currentCategory ===  props.type? '#fff' : '#ccc'};
-    font-weight: ${(props) => props.currentCategory ===  props.type? 700 : 400};
+    color: ${(props) =>
+      props.currentCategory === props.type ? "#fff" : "#ccc"};
+    font-weight: ${(props) =>
+      props.currentCategory === props.type ? 700 : 400};
   }
 `;
 

@@ -67,7 +67,7 @@ export default function AuthForm({ type }: { type: "login" | "register" }) {
         .slice(authErr.code.indexOf("/") + 1, authErr.code.length)
         .split("-")
         .join(" ");
-      dispatch(setModal({error: authErr }));
+      dispatch(setModal({ error: authErr }));
     }
     setIsLoading(false);
   }

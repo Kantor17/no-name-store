@@ -23,7 +23,7 @@ export default function Catalog() {
             <Categories />
             <Sorter />
           </div>
-        <ProductList />
+          <ProductList />
         </>
       </Page>
     </StyledCatalog>

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface CartState {
+interface CartState {
   productsIds: number[];
   totalSum: number;
 }
@@ -27,4 +27,5 @@ const cartSlice = createSlice({
 
 export default cartSlice.reducer;
 
-export const { addProductId, removeProductId, changeTotalSum } = cartSlice.actions;
+export const { addProductId, removeProductId, changeTotalSum } =
+  cartSlice.actions;

@@ -14,8 +14,8 @@ const StyledOrderPanel = styled.div`
 
 export default function OrderPanel() {
   const dispatch = useTypedDispatch();
-  const {productsIds, totalSum} = useTypedSelector((state) => state.cart);
-  if(productsIds.length <= 0) return null;
+  const { productsIds, totalSum } = useTypedSelector((state) => state.cart);
+  if (productsIds.length <= 0) return null;
   return (
     <StyledOrderPanel>
       <h3 className="total-sum">

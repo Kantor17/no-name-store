@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ModalInfo } from "../../types";
 
 interface ModalState {
-  modal: ModalInfo| null;
+  modal: ModalInfo | null;
 }
 const initialState: ModalState = {
   modal: null,

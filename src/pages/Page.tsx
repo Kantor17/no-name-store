@@ -17,9 +17,7 @@ export default function Page({ children }: { children: React.ReactElement }) {
       <Header />
       <Main>
         {children}
-        {modalInfo && (
-          <Modal modalInfo={modalInfo}/>
-        )}
+        {modalInfo && <Modal modalInfo={modalInfo} />}
       </Main>
       <Footer />
     </StyledPage>

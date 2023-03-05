@@ -84,7 +84,9 @@ export default function ProductDetails({ product }: { product: Product }) {
         </div>
         <div className="order">
           <div className="price">{product.price} $</div>
-          <Button onClick={onCartClick}>{inCart  ? 'In cart ✓ ' : 'Add to cart'}</Button>
+          <Button onClick={onCartClick}>
+            {inCart ? "In cart ✓ " : "Add to cart"}
+          </Button>
         </div>
       </div>
     </StyledProductDetails>

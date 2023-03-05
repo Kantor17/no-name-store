@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CategoryTypes, Product, ProductsState, SortTypes } from "../../types";
+import { CategoryTypes, Product, SortTypes } from "../../types";
 
+interface ProductsState {
+  products: Product[];
+  sortType: SortTypes;
+  category: CategoryTypes;
+}
 const initialState: ProductsState = {
   products: [],
   sortType: SortTypes.POPULARITY,
   category: "electronics",
 };
+
 const productsSlice = createSlice({
   name: "products",
   initialState,

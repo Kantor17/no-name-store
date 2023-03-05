@@ -1,17 +1,15 @@
-import styled from 'styled-components';
-import Container from './Container';
+import styled from "styled-components";
+import Container from "./Container";
 
 const StyledMain = styled.main`
   padding: 10px 0 35px 0;
   flex: 1 1 auto;
 `;
 
-export default function Main({children} : {children: React.ReactNode}) {
+export default function Main({ children }: { children: React.ReactNode }) {
   return (
     <StyledMain>
-      <Container>
-        {children}
-      </Container>
+      <Container>{children}</Container>
     </StyledMain>
-  )
+  );
 }

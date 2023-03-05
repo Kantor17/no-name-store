@@ -7,7 +7,7 @@ import Loader from "../ui/Loader";
 import { useTypedDispatch } from "../hooks/reduxHooks";
 import { setModal } from "../store/slices/modalSlice";
 import { changeTotalSum, removeProductId } from "../store/slices/cartSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const StyledCartItem = styled.li`
   display: flex;
@@ -23,7 +23,6 @@ const StyledCartItem = styled.li`
     row-gap: 4px;
   }
   .right-column {
-    /* justify-content: sp; */
     align-items: flex-end;
   }
   .image {

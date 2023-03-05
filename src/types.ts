@@ -1,5 +1,3 @@
-import { User } from "firebase/auth";
-
 export type CategoryTypes =
   | "men's clothing"
   | "women's clothing"
@@ -33,15 +31,4 @@ export interface ModalInfo {
     title: string;
     action: () => void;
   }[];
-}
-
-export interface ProductsState {
-  products: Product[];
-  sortType: SortTypes;
-  category: CategoryTypes;
-}
-
-export interface AuthState {
-  user: User | null;
-  isLoading: boolean;
 }
