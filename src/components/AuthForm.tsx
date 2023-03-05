@@ -8,8 +8,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth, provider } from "../firebase";
+import { useTypedDispatch } from "../hooks/reduxHooks";
+import { setModal } from "../store/slices/modalSlice";
 import Button from "../ui/Button";
-import ModalError from "../ui/ModalError";
 
 const StyledAuthForm = styled.form`
   max-width: 400px;
@@ -33,10 +34,10 @@ const StyledAuthForm = styled.form`
 
 export default function AuthForm({ type }: { type: "login" | "register" }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useTypedDispatch();
   const navigate = useNavigate();
   async function handleAuth(
     event: React.FormEvent | React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -59,58 +60,61 @@ export default function AuthForm({ type }: { type: "login" | "register" }) {
           break;
         }
       }
-      navigate('/profile');
+      navigate("/profile");
     } catch (err) {
       const authErr = err as FirebaseError;
-      authErr.message = authErr.code.slice(authErr.code.indexOf('/') + 1, authErr.code.length).split('-').join(' ');
-      setError(authErr);
+      authErr.message = authErr.code
+        .slice(authErr.code.indexOf("/") + 1, authErr.code.length)
+        .split("-")
+        .join(" ");
+      dispatch(setModal({error: authErr }));
     }
     setIsLoading(false);
   }
   return (
-    <>
-      {error && <ModalError error={error} closeCb={() => setError(null)} />}
-      <StyledAuthForm onSubmit={(event) => handleAuth(event, type)}>
-        <div className="field">
-          <label htmlFor="email">E-mail</label>
-          <input
-            id="email"
-            type="email"
-            required
-            className="input"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
+    <StyledAuthForm onSubmit={(event) => handleAuth(event, type)}>
+      <div className="field">
+        <label htmlFor="email">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          required
+          className="input"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+      </div>
+      <div className="field">
+        <label htmlFor="password">Password</label>
+        <input
+          minLength={6}
+          id="password"
+          type="password"
+          required
+          className="password input"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+      </div>
+      <Button type="submit" isLoading={isLoading}>
+        {type}
+      </Button>
+      <Button
+        onClick={(event) => handleAuth(event, "google")}
+        isLoading={isLoading}
+      >
+        Sign in with Google
+      </Button>
+      {type === "login" && (
+        <div className="register-proposition">
+          Don't have an account yet? <Link to={"/register"}>Register</Link>
         </div>
-        <div className="field">
-          <label htmlFor="password">Password</label>
-          <input
-            minLength={6}
-            id="password"
-            type="password"
-            required
-            className="password input"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
+      )}
+      {type === "register" && (
+        <div className="register-proposition">
+          Already have an account? <Link to={"/login"}>Login</Link>
         </div>
-        <Button type="submit" isLoading={isLoading}>
-          {type}
-        </Button>
-        <Button onClick={(event) => handleAuth(event, 'google')} isLoading={isLoading}>
-          Sign in with Google
-        </Button>
-        {type === "login" && (
-          <div className="register-proposition">
-            Don't have an account yet? <Link to={"/register"}>Register</Link>
-          </div>
-        )}
-        {type === "register" && (
-          <div className="register-proposition">
-            Already have an account? <Link to={"/login"}>Login</Link>
-          </div>
-        )}
-      </StyledAuthForm>
-    </>
+      )}
+    </StyledAuthForm>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useTypedSelector } from "../hooks/reduxHooks";
 import Container from "./Container";
 
 const StyledHeader = styled.header`
@@ -20,23 +21,26 @@ const StyledHeader = styled.header`
 `;
 
 export default function Header() {
+  const user = useTypedSelector((state) => state.auth.user);
   return (
     <StyledHeader>
       <Container>
         <div className="navbar">
           <h1 className="logo">
-          <Link to={'/'}>NONAME</Link>
+            <Link to={"/"}>NONAME</Link>
           </h1>
           <ul className="navlist">
             <li className="navitem">
-              <Link to={'/catalog'}>Catalog</Link>
+              <Link to={"/catalog"}>Catalog</Link>
             </li>
             <li className="navitem">
-              <Link to={'/profile'}>Profile</Link>
+              <Link to={"/profile"}>Profile</Link>
             </li>
-            <li className="navitem">
-              <a href="#">Cart</a>
-            </li>
+            {user && (
+              <li className="navitem">
+                <Link to={"/cart"}>Cart</Link>
+              </li>
+            )}
           </ul>
         </div>
       </Container>

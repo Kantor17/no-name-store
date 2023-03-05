@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Main from "../components/Main";
 import { useTypedSelector } from "../hooks/reduxHooks";
 import avatarImg from "../assets/avatar.png";
 import Button from "../ui/Button";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import Page from "./Page";
 
 const StyledProfile = styled.div`
   .user-info {
@@ -27,16 +25,14 @@ const StyledProfile = styled.div`
 export default function Profile() {
   const user = useTypedSelector((state) => state.auth.user);
   return (
-    <StyledProfile className="page">
-      <Header />
-      <Main>
+    <StyledProfile className="page-wrapper">
+      <Page>
         <div className="user-info">
           <img src={avatarImg} alt="Avatar" className="avatar" />
           <p className="email">{user?.email}</p>
           <Button onClick={() => signOut(auth)}>Logout</Button>
         </div>
-      </Main>
-      <Footer />
+      </Page>
     </StyledProfile>
   );
 }

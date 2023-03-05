@@ -6,7 +6,7 @@ import fetchProducts from "../API/fetchProducts";
 import ProductCard from "./ProductCard";
 import { Product, SortTypes } from "../types";
 import Loader from "../ui/Loader";
-import ModalError from "../ui/ModalError";
+import { setModal } from "../store/slices/modalSlice";
 
 const StyledProductList = styled.ul`
   display: flex;
@@ -17,7 +17,6 @@ const StyledProductList = styled.ul`
 `;
 
 export default function ProductList() {
-  const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useTypedDispatch();
@@ -52,17 +51,12 @@ export default function ProductList() {
         if (res.length < 1) throw new Error("No products found");
         dispatch(replaceProducts(res));
       } catch (err) {
-        setError(err as Error);
+        dispatch(setModal({ error: err as Error }));
       }
       setIsLoading(false);
     })();
   }, [dispatch, category]);
 
-  if (error) {
-    return (
-      <ModalError closeCb={() => setError(null)} error={error}></ModalError>
-    );
-  }
   if (isLoading) {
     return <Loader />;
   }

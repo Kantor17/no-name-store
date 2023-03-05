@@ -25,6 +25,16 @@ export interface Product {
   title: string;
 }
 
+export interface ModalInfo {
+  error?: Error;
+  message?: string;
+  closeCb?: () => void;
+  buttons?: {
+    title: string;
+    action: () => void;
+  }[];
+}
+
 export interface ProductsState {
   products: Product[];
   sortType: SortTypes;

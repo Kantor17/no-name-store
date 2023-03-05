@@ -2,26 +2,32 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import fetchProduct from "../API/fetchProduct";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Main from "../components/Main";
 import ProductDetails from "../components/ProductDetails";
+import { useTypedDispatch } from "../hooks/reduxHooks";
+import { setModal } from "../store/slices/modalSlice";
 import { Product } from "../types";
 import Loader from "../ui/Loader";
-import ModalError from "../ui/ModalError";
+import Page from "./Page";
 
 const StyledProductPage = styled.div``;
 
 export default function ProductPage() {
-  const [error, setError] = useState<Error | null>(null);
   const [product, setProduct] = useState<Product>();
+
+  const dispatch = useTypedDispatch();
+  const navigate = useNavigate();
 
   const param = useParams().id;
   const productId = param?.slice(1, param.length);
 
   useEffect(() => {
     if (!productId) {
-      setError(new Error("Can't find the product."));
+      dispatch(
+        setModal({
+          error: new Error("Can't find the product."),
+          closeCb: () => navigate(-1),
+        })
+      );
       return;
     }
     (async () => {
@@ -29,25 +35,16 @@ export default function ProductPage() {
         const res = fetchProduct(productId);
         setProduct(await res);
       } catch (err) {
-        setError(err as Error);
+        dispatch(
+          setModal({ error: err as Error, closeCb: () => navigate(-1) })
+        );
       }
     })();
-  }, [productId]);
+  }, [productId, dispatch, navigate]);
 
-  const navigate = useNavigate();
   return (
-    <StyledProductPage className="page">
-      <Header />
-      <Main>
-        {error ? (
-          <ModalError error={error} closeCb={() => navigate(-1)} />
-        ) : product ? (
-          <ProductDetails product={product} />
-        ) : (
-          <Loader />
-        )}
-      </Main>
-      <Footer />
+    <StyledProductPage className="page-wrapper">
+      <Page>{product ? <ProductDetails product={product} /> : <Loader />}</Page>
     </StyledProductPage>
   );
 }

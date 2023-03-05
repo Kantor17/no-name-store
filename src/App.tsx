@@ -10,6 +10,8 @@ import { auth } from "./firebase";
 import { login, logout } from "./store/slices/authSlice";
 import PrivateRoute from "./pages/PrivateRoute";
 import Profile from "./pages/Profile";
+import Cart from "./pages/Cart";
+import { useTypedSelector } from "./hooks/reduxHooks";
 
 const router = createBrowserRouter([
   {
@@ -31,11 +33,23 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <AuthPage type={"register"} />,
-  },{
-    path: "/profile",
-    element: <PrivateRoute><Profile /></PrivateRoute>
   },
-  
+  {
+    path: "/profile",
+    element: (
+      <PrivateRoute>
+        <Profile />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/cart",
+    element: (
+      <PrivateRoute>
+        <Cart />
+      </PrivateRoute>
+    ),
+  },
 ]);
 
 export default function App() {
@@ -50,5 +64,5 @@ export default function App() {
     });
   });
 
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router}></RouterProvider>;
 }

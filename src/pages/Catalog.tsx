@@ -1,10 +1,8 @@
-import Header from "../components/Header";
 import styled from "styled-components";
-import Footer from "../components/Footer";
 import ProductList from "../components/ProductList";
 import Sorter from "../components/Sorter";
 import Categories from "../components/Categories";
-import Main from "../components/Main";
+import Page from "./Page";
 
 const StyledCatalog = styled.div`
   .control-panel {
@@ -18,16 +16,16 @@ const StyledCatalog = styled.div`
 
 export default function Catalog() {
   return (
-    <StyledCatalog className="page">
-      <Header />
-      <Main>
-        <div className="control-panel">
-          <Categories />
-          <Sorter />
-        </div>
+    <StyledCatalog className="page-wrapper">
+      <Page>
+        <>
+          <div className="control-panel">
+            <Categories />
+            <Sorter />
+          </div>
         <ProductList />
-      </Main>
-      <Footer />
+        </>
+      </Page>
     </StyledCatalog>
   );
 }

@@ -1,18 +1,14 @@
 import styled from "styled-components";
 import AuthForm from "../components/AuthForm";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Main from "../components/Main";
+import Page from "./Page";
 
 const StyledAuthPage = styled.div``;
 export default function AuthPage({ type }: { type: "login" | "register" }) {
   return (
-    <StyledAuthPage className="page">
-      <Header />
-      <Main>
+    <StyledAuthPage className="page-wrapper">
+      <Page>
         <AuthForm type={type} />
-      </Main>
-      <Footer />
+      </Page>
     </StyledAuthPage>
   );
 }

@@ -14,10 +14,8 @@ const Global = createGlobalStyle`
   html, body, #root, .App {
     height: 100%;
   }
-  .page {
+  .page-wrapper {
     height: 100%;
-    display: flex;
-    flex-direction: column;
   }
   ul, ol {
     list-style: none;

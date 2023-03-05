@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Product } from "../types";
 import ratingIcon from "../assets/rating.svg";
 import Button from "../ui/Button";
+import { useTypedSelector } from "../hooks/reduxHooks";
+import { useCartHandler } from "../hooks/appHooks";
 
 const StyledProductDetails = styled.div`
   display: flex;
@@ -63,6 +65,9 @@ const StyledProductDetails = styled.div`
 `;
 
 export default function ProductDetails({ product }: { product: Product }) {
+  const cartProducts = useTypedSelector((state) => state.cart.productsIds);
+  const inCart = cartProducts.includes(product.id);
+  const onCartClick = useCartHandler(product.id, inCart);
   return (
     <StyledProductDetails>
       <div className="image-row">
@@ -79,7 +84,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         </div>
         <div className="order">
           <div className="price">{product.price} $</div>
-          <Button>Add to cart</Button>
+          <Button onClick={onCartClick}>{inCart  ? 'In cart ✓ ' : 'Add to cart'}</Button>
         </div>
       </div>
     </StyledProductDetails>
