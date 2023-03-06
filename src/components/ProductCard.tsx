@@ -43,9 +43,7 @@ const StyledProductCard = styled.div`
 `;
 
 export default function ProductCard({ product }: { product: Product }) {
-  const cartProductsIds = useTypedSelector((state) => state.cart.productsIds);
-  const inCart = cartProductsIds.includes(product.id);
-  const onCartClick = useCartHandler(product, inCart);
+  const { onCartClick, inCart } = useCartHandler(product);
   return (
     <StyledProductCard>
       <Link to={`/catalog/:${product.id}`} className="img-link">

@@ -65,9 +65,7 @@ const StyledProductDetails = styled.div`
 `;
 
 export default function ProductDetails({ product }: { product: Product }) {
-  const cartProducts = useTypedSelector((state) => state.cart.productsIds);
-  const inCart = cartProducts.includes(product.id);
-  const onCartClick = useCartHandler(product, inCart);
+  const { onCartClick, inCart } = useCartHandler(product);
   return (
     <StyledProductDetails>
       <div className="image-row">
