@@ -5,7 +5,7 @@ interface CartState {
   totalSum: number;
 }
 const initialState: CartState = {
-  productsIds: [],
+  productsIds: JSON.parse(localStorage.getItem("cartProductsIds") || "[]"),
   totalSum: 0,
 };
 
