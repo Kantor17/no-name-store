@@ -34,6 +34,13 @@ const Global = createGlobalStyle`
     background-color: inherit;
     border: none;
   }
+
+  .link {
+    transition: 0.12s;
+    &:hover {
+      color: #777;
+    }
+  }
 `;
 
 const root = ReactDOM.createRoot(

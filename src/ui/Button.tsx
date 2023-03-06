@@ -10,6 +10,10 @@ const StyledButton = styled.button<ButtonProps>`
   background-color: #26272b;
   text-transform: uppercase;
   pointer-events: ${(props) => (props.isLoading ? "none" : "all")};
+  transition: 0.12s;
+  &:hover{
+    background-color: #777;
+  }
 `;
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

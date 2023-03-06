@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useTypedSelector } from "../hooks/reduxHooks";
 import Container from "./Container";
@@ -18,6 +18,9 @@ const StyledHeader = styled.header`
     column-gap: 12px;
     align-items: center;
   }
+  .navlink.active {
+    font-weight: 700;
+  }
 `;
 
 export default function Header() {
@@ -27,18 +30,26 @@ export default function Header() {
       <Container>
         <div className="navbar">
           <h1 className="logo">
-            <Link to={"/"}>NONAME</Link>
+            <NavLink className="link navlink" to={"/"}>
+              NONAME
+            </NavLink>
           </h1>
           <ul className="navlist">
             <li className="navitem">
-              <Link to={"/catalog"}>Catalog</Link>
+              <NavLink className="link navlink" to={"/catalog"}>
+                Catalog
+              </NavLink>
             </li>
             <li className="navitem">
-              <Link to={"/profile"}>Profile</Link>
+              <NavLink className="link navlink" to={"/profile"}>
+                Profile
+              </NavLink>
             </li>
             {user && (
               <li className="navitem">
-                <Link to={"/cart"}>Cart</Link>
+                <NavLink className="link navlink" to={"/cart"}>
+                  Cart
+                </NavLink>
               </li>
             )}
           </ul>

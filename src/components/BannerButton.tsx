@@ -11,6 +11,11 @@ const StyledBannerButton = styled.button`
   color: #000;
   border: 2px solid #fff;
   border-radius: 36px;
+  transition: 0.12s;
+  &:hover{
+    background-color: #ccc;
+    border-color: #ccc;
+  }
 `;
 
 export default function BannerButton({
