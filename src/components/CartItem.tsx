@@ -69,7 +69,7 @@ export default function CartItem({ productId }: { productId: number }) {
       <StyledCartItem>
         <div className="column">
           <div className="image">
-            <Link to={`/catalog/:${productId}`} replace>
+            <Link to={`/products/:${productId}`} replace>
               <img src={product.image} alt={product.title} />
             </Link>
           </div>

@@ -3,6 +3,8 @@ import ProductList from "../components/ProductList";
 import Sorter from "../components/Sorter";
 import Categories from "../components/Categories";
 import Page from "./Page";
+import { useParams } from "react-router-dom";
+import { CategoryTypes } from "../types";
 
 const StyledCatalog = styled.div`
   .control-panel {
@@ -15,6 +17,8 @@ const StyledCatalog = styled.div`
 `;
 
 export default function Catalog() {
+  const param = useParams().category;
+  const category = param?.slice(1, param.length) as CategoryTypes;
   return (
     <StyledCatalog className="page-wrapper">
       <Page>
@@ -23,7 +27,7 @@ export default function Catalog() {
             <Categories />
             <Sorter />
           </div>
-          <ProductList />
+          <ProductList category={category} />
         </>
       </Page>
     </StyledCatalog>

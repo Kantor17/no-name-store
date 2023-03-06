@@ -35,6 +35,7 @@ export default function Categories() {
   if (isLoading) return <Loader />;
   return (
     <StyledCategories>
+      <Category />
       {categories.map((category) => (
         <Category type={category} key={category} />
       ))}

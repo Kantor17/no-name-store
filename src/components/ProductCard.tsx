@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Product } from "../types";
 import cartIcon from "../assets/cart.svg";
 import inCartIcon from "../assets/in-cart.svg";
-import { useTypedSelector } from "../hooks/reduxHooks";
 import { useCartHandler } from "../hooks/appHooks";
 import { Link } from "react-router-dom";
 
@@ -46,7 +45,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const { onCartClick, inCart } = useCartHandler(product);
   return (
     <StyledProductCard>
-      <Link to={`/catalog/:${product.id}`} className="img-link">
+      <Link to={`/products/:${product.id}`} className="img-link">
         <img src={product.image} alt={product.title} className="image" />
       </Link>
       <div className="info">

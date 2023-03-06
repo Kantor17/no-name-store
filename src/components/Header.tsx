@@ -36,18 +36,18 @@ export default function Header() {
           </h1>
           <ul className="navlist">
             <li className="navitem">
-              <NavLink className="link navlink" to={"/catalog"}>
+              <NavLink className="link navlink" to={"/catalog/"}>
                 Catalog
               </NavLink>
             </li>
             <li className="navitem">
-              <NavLink className="link navlink" to={"/profile"}>
+              <NavLink className="link navlink" to={"/profile/"}>
                 Profile
               </NavLink>
             </li>
             {user && (
               <li className="navitem">
-                <NavLink className="link navlink" to={"/cart"}>
+                <NavLink className="link navlink" to={"/cart/"}>
                   Cart
                 </NavLink>
               </li>

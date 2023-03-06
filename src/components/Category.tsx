@@ -1,37 +1,38 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { useTypedDispatch, useTypedSelector } from "../hooks/reduxHooks";
-import { changeCategory } from "../store/slices/productsSlice";
 import { CategoryTypes } from "../types";
 
-const StyledCategory = styled.li<{
-  type: CategoryTypes;
-  currentCategory: CategoryTypes;
-}>`
-  .category-btn {
+const StyledCategory = styled.li`
+  .category-link {
+    display: block;
+    text-align: center;
     background-color: #26272b;
+    padding: 3px 5px;
     width: 160px;
     height: 25px;
     font-size: 18px;
     text-transform: capitalize;
-    color: ${(props) =>
-      props.currentCategory === props.type ? "#fff" : "#ccc"};
-    font-weight: ${(props) =>
-      props.currentCategory === props.type ? 700 : 400};
+    color: #ccc;
+    transition: 0.12s;
+    &.active {
+      font: 700px;
+      color: #fff;
+    }
+    &:hover {
+      color: #ddd;
+    }
   }
 `;
 
-export default function Category({ type }: { type: CategoryTypes }) {
-  const currentCategory = useTypedSelector((state) => state.products.category);
-  const dispatch = useTypedDispatch();
+export default function Category({ type }: { type?: CategoryTypes }) {
   return (
-    <StyledCategory type={type} currentCategory={currentCategory}>
-      <button
-        className="category-btn"
-        value={type}
-        onClick={() => dispatch(changeCategory(type))}
+    <StyledCategory>
+      <NavLink
+        to={type ? `/catalog/:${type}` : "/catalog/"}
+        className={"category-link"}
       >
-        {type}
-      </button>
+        {type || "All"}
+      </NavLink>
     </StyledCategory>
   );
 }

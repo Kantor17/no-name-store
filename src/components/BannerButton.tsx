@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useTypedDispatch } from "../hooks/reduxHooks";
-import { changeCategory } from "../store/slices/productsSlice";
 import { CategoryTypes } from "../types";
 
 const StyledBannerButton = styled.button`
@@ -12,7 +10,7 @@ const StyledBannerButton = styled.button`
   border: 2px solid #fff;
   border-radius: 36px;
   transition: 0.12s;
-  &:hover{
+  &:hover {
     background-color: #ccc;
     border-color: #ccc;
   }
@@ -26,13 +24,8 @@ export default function BannerButton({
   children: React.ReactNode;
 }) {
   const navigate = useNavigate();
-  const dispatch = useTypedDispatch();
-  function goToCatalog(category: CategoryTypes) {
-    dispatch(changeCategory(category));
-    navigate("/catalog", { replace: true });
-  }
   return (
-    <StyledBannerButton onClick={() => goToCatalog(category)}>
+    <StyledBannerButton onClick={() => navigate(`/catalog/:${category}`)}>
       {children}
     </StyledBannerButton>
   );

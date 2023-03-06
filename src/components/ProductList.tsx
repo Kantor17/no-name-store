@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTypedDispatch, useTypedSelector } from "../hooks/reduxHooks";
 import { replaceProducts } from "../store/slices/productsSlice";
 import styled from "styled-components";
-import fetchProducts from "../API/fetchProducts";
 import ProductCard from "./ProductCard";
-import { Product, SortTypes } from "../types";
+import { CategoryTypes, Product, SortTypes } from "../types";
 import Loader from "../ui/Loader";
 import { setModal } from "../store/slices/modalSlice";
 
@@ -16,9 +15,9 @@ const StyledProductList = styled.ul`
   padding: 16px 0;
 `;
 
-export default function ProductList() {
+export default function ProductList({ category }: { category: CategoryTypes }) {
   const dispatch = useTypedDispatch();
-  const { products, category, status, error } = useTypedSelector((state) => {
+  const { products, status, error } = useTypedSelector((state) => {
     let compareFunc;
     switch (state.products.sortType) {
       case SortTypes.POPULARITY: {

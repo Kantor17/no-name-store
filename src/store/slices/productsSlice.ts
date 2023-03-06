@@ -5,21 +5,19 @@ import { CategoryTypes, Product, SortTypes } from "../../types";
 interface ProductsState {
   products: Product[];
   sortType: SortTypes;
-  category: CategoryTypes;
   status: "pending" | "rejected" | "fulfilled";
   error: Error | null;
 }
 const initialState: ProductsState = {
   products: [],
   sortType: SortTypes.POPULARITY,
-  category: "electronics",
   status: "fulfilled",
   error: null,
 };
 
 export const replaceProducts = createAsyncThunk(
   "replace-products",
-  async (category: string) => {
+  async (category?: CategoryTypes) => {
     const products = await fetchProducts(category);
     return products;
   }
@@ -31,9 +29,6 @@ const productsSlice = createSlice({
   reducers: {
     changeSorting: (state, action: PayloadAction<SortTypes>) => {
       state.sortType = action.payload;
-    },
-    changeCategory: (state, action: PayloadAction<CategoryTypes>) => {
-      state.category = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -53,4 +48,4 @@ const productsSlice = createSlice({
 
 export default productsSlice.reducer;
 
-export const { changeSorting, changeCategory } = productsSlice.actions;
+export const { changeSorting } = productsSlice.actions;

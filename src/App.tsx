@@ -11,7 +11,6 @@ import { login, logout } from "./store/slices/authSlice";
 import PrivateRoute from "./pages/PrivateRoute";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
-import { useTypedSelector } from "./hooks/reduxHooks";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +18,11 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/catalog",
+    path: "/catalog/:category?",
     element: <Catalog />,
   },
   {
-    path: "/catalog/:id",
+    path: "/products/:id",
     element: <ProductPage />,
   },
   {
