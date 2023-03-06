@@ -1,17 +1,21 @@
-import { configureStore, createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  createListenerMiddleware,
+  isAnyOf,
+} from "@reduxjs/toolkit";
 import productsSlice from "./slices/productsSlice";
 import authSlice from "./slices/authSlice";
-import cartSlice, { addProductId, removeProductId } from "./slices/cartSlice";
+import cartSlice, { addToCart, removeFromCart } from "./slices/cartSlice";
 import modalSlice from "./slices/modalSlice";
 
 const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
-  matcher: isAnyOf(addProductId, removeProductId),
+  matcher: isAnyOf(addToCart, removeFromCart),
   effect: (action, listenerAPI) => {
     localStorage.setItem(
-      "cartProductsIds",
-      JSON.stringify((listenerAPI.getState() as RootState).cart.productsIds)
+      "cart",
+      JSON.stringify((listenerAPI.getState() as RootState).cart)
     );
   },
 });

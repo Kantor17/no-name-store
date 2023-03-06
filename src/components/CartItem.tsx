@@ -6,7 +6,7 @@ import fetchProduct from "../API/fetchProduct";
 import Loader from "../ui/Loader";
 import { useTypedDispatch } from "../hooks/reduxHooks";
 import { setModal } from "../store/slices/modalSlice";
-import { changeTotalSum, removeProductId } from "../store/slices/cartSlice";
+import { removeFromCart } from "../store/slices/cartSlice";
 import { Link } from "react-router-dom";
 
 const StyledCartItem = styled.li`
@@ -51,7 +51,6 @@ export default function CartItem({ productId }: { productId: number }) {
       try {
         const fetchedProduct = await fetchProduct(productId);
         setProduct(fetchedProduct);
-        dispatch(changeTotalSum(fetchedProduct.price));
       } catch (err) {
         dispatch(
           setModal({
@@ -63,14 +62,6 @@ export default function CartItem({ productId }: { productId: number }) {
       setIsLoading(false);
     })();
   }, [productId, dispatch]);
-
-  useEffect(() => {
-    if (product) {
-      return () => {
-        dispatch(changeTotalSum(-product.price));
-      };
-    }
-  }, [product, dispatch]);
 
   if (isLoading) return <Loader />;
   if (product)
@@ -88,7 +79,7 @@ export default function CartItem({ productId }: { productId: number }) {
           <div className="price">{product.price}$</div>
           <button
             className="remove-btn"
-            onClick={() => dispatch(removeProductId(productId))}
+            onClick={() => dispatch(removeFromCart(product))}
           >
             <img src={removeIcon} alt="remove" />
           </button>

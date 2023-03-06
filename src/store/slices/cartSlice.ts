@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Product } from "../../types";
 
 interface CartState {
   productsIds: number[];
   totalSum: number;
 }
-const initialState: CartState = {
-  productsIds: JSON.parse(localStorage.getItem("cartProductsIds") || "[]"),
+const initialState: CartState = JSON.parse(
+  localStorage.getItem("cart") || "null"
+) || {
+  productsIds: [],
   totalSum: 0,
 };
 
@@ -13,19 +16,17 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addProductId: (state, action: PayloadAction<number>) => {
-      state.productsIds.push(action.payload);
+    addToCart: (state, action: PayloadAction<Product>) => {
+      state.productsIds.push(action.payload.id);
+      state.totalSum += action.payload.price;
     },
-    removeProductId: (state, action: PayloadAction<number>) => {
-      state.productsIds.splice(state.productsIds.indexOf(action.payload), 1);
-    },
-    changeTotalSum: (state, action: PayloadAction<number>) => {
-      state.totalSum += action.payload;
+    removeFromCart: (state, action: PayloadAction<Product>) => {
+      state.productsIds.splice(state.productsIds.indexOf(action.payload.id), 1);
+      state.totalSum -= action.payload.price;
     },
   },
 });
 
 export default cartSlice.reducer;
 
-export const { addProductId, removeProductId, changeTotalSum } =
-  cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;

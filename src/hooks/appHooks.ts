@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { addProductId } from "../store/slices/cartSlice";
+import { addToCart } from "../store/slices/cartSlice";
 import { setModal } from "../store/slices/modalSlice";
+import { Product } from "../types";
 import { useTypedDispatch, useTypedSelector } from "./reduxHooks";
 
-export function useCartHandler(productId: number, inCart: boolean) {
+export function useCartHandler(product: Product, inCart: boolean) {
   const user = useTypedSelector((state) => state.auth.user);
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();
@@ -16,5 +17,7 @@ export function useCartHandler(productId: number, inCart: boolean) {
         })
       );
   if (inCart) return () => navigate(`/cart`);
-  return () => dispatch(addProductId(productId));
+  return () => {
+    dispatch(addToCart(product));
+  };
 }
