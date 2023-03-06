@@ -1,24 +1,34 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import fetchProducts from "../../API/fetchProducts";
 import { CategoryTypes, Product, SortTypes } from "../../types";
 
 interface ProductsState {
   products: Product[];
   sortType: SortTypes;
   category: CategoryTypes;
+  status: "pending" | "rejected" | "fulfilled";
+  error: Error | null;
 }
 const initialState: ProductsState = {
   products: [],
   sortType: SortTypes.POPULARITY,
   category: "electronics",
+  status: "fulfilled",
+  error: null,
 };
+
+export const replaceProducts = createAsyncThunk(
+  "replace-products",
+  async (category: string) => {
+    const products = await fetchProducts(category);
+    return products;
+  }
+);
 
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    replaceProducts: (state, action: PayloadAction<Product[]>) => {
-      state.products = action.payload;
-    },
     changeSorting: (state, action: PayloadAction<SortTypes>) => {
       state.sortType = action.payload;
     },
@@ -26,9 +36,21 @@ const productsSlice = createSlice({
       state.category = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(replaceProducts.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(replaceProducts.rejected, (state, action) => {
+      state.status = "rejected";
+      state.error = action.error as Error;
+    });
+    builder.addCase(replaceProducts.fulfilled, (state, action) => {
+      state.status = "fulfilled";
+      state.products = action.payload;
+    });
+  },
 });
 
 export default productsSlice.reducer;
 
-export const { replaceProducts, changeSorting, changeCategory } =
-  productsSlice.actions;
+export const { changeSorting, changeCategory } = productsSlice.actions;

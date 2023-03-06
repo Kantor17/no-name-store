@@ -17,10 +17,8 @@ const StyledProductList = styled.ul`
 `;
 
 export default function ProductList() {
-  const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useTypedDispatch();
-  const { products, category } = useTypedSelector((state) => {
+  const { products, category, status, error } = useTypedSelector((state) => {
     let compareFunc;
     switch (state.products.sortType) {
       case SortTypes.POPULARITY: {
@@ -38,31 +36,27 @@ export default function ProductList() {
       }
     }
     return {
+      ...state.products,
       products: [...state.products.products].sort(compareFunc),
-      category: state.products.category,
     };
   });
 
   useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetchProducts(category);
-        if (res.length < 1) throw new Error("No products found");
-        dispatch(replaceProducts(res));
-      } catch (err) {
-        dispatch(setModal({ error: err as Error }));
-      }
-      setIsLoading(false);
-    })();
+    dispatch(replaceProducts(category));
   }, [dispatch, category]);
 
-  if (isLoading) {
+  useEffect(() => {
+    if (error) {
+      dispatch(setModal({ error }));
+    }
+  }, [dispatch, error]);
+
+  if (status === "pending") {
     return <Loader />;
   }
   return (
     <StyledProductList>
-      {[...products].map((product) => (
+      {products.map((product) => (
         <ProductCard product={product} key={product.id} />
       ))}
     </StyledProductList>
